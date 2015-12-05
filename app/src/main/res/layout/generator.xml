@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_marginTop="5pt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:textSize="9pt"
+                    android:maxWidth="100pt"
+                    android:layout_width="wrap_content"
+                    android:text="Длина (7 символов)"
+                    />
+
+                <SeekBar
+                    android:layout_marginTop="1pt"
+                    android:progress="20"
+                    android:minWidth="80pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/passLen" />
+            </GridLayout>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="5pt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="5pt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_marginLeft="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorMetal"
+                android:layout_marginBottom="10pt"
+                android:text="Сгенерировать"
+                android:onClick="generatePassword"
+                android:id="@+id/generatePassButton" />
+
+        </TableRow>
+        <TableRow><TextView
+            android:visibility="invisible"
+            android:text="@string/question_1" /></TableRow>
+    </TableLayout>
+</LinearLayout>

@@ -27,7 +27,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:progress="0"
+                    android:layout_marginRight="5pt"
+                    android:minWidth="100pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:id="@+id/progressBar" />
+            </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -39,7 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email"
+        android:src="@android:drawable/ic_lock_idle_lock"
+        android:tint="@color/colorMetal"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end" />
 

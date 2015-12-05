@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,10 +9,495 @@
     tools:context="android.com.smartgen.Questionnaire"
     tools:showIn="@layout/activity_questionnaire">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/table_1">
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="fill_parent"
+                    android:width="0dip"
+                    android:textColor="@color/questionTitle"
+                    android:textSize="11pt"
+                    android:text="Вопрос 1"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="10pt"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:width="0dip"
+                    android:textSize="9pt"
+                    android:text="@string/question_1"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_marginLeft="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_1" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textColor="@color/questionTitle"
+                    android:textSize="11pt"
+                    android:text="Вопрос 2"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginLeft="10pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textSize="9pt"
+                    android:text="@string/question_2"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_marginLeft="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_2" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textColor="@color/questionTitle"
+                    android:textSize="11pt"
+                    android:text="Вопрос 3"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginLeft="10pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textSize="9pt"
+                    android:text="@string/question_3"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_marginLeft="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_3" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textColor="@color/questionTitle"
+                    android:textSize="11pt"
+                    android:text="Вопрос 4"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginLeft="10pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textSize="9pt"
+                    android:text="@string/question_4"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_marginLeft="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_4" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textColor="@color/questionTitle"
+                    android:textSize="11pt"
+                    android:text="Вопрос 5"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginLeft="10pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textSize="9pt"
+                    android:text="@string/question_5"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_marginLeft="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_5" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:width="40pt"
+                    android:textAlignment="textStart"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorMetal"
+                    android:layout_marginBottom="10pt"
+                    android:layout_gravity="right"
+                    android:padding="6pt"
+                    android:text="Вперед"
+                    android:id="@+id/button_to_2_from_1" />
+
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:visibility="invisible"
+                    android:text="@string/question_1" />
+            </TableRow>
+        </TableLayout>
+
+
+        <TableLayout
+            android:visibility="gone"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/table_2">
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textColor="@color/questionTitle"
+                    android:textSize="11pt"
+                    android:text="Вопрос 6"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginLeft="10pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textSize="9pt"
+                    android:text="@string/question_6"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_marginLeft="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_6" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textColor="@color/questionTitle"
+                    android:textSize="11pt"
+                    android:text="Вопрос 7"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginLeft="10pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textSize="9pt"
+                    android:text="@string/question_7"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_marginLeft="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_7" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textColor="@color/questionTitle"
+                    android:textSize="11pt"
+                    android:text="Вопрос 8"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginLeft="10pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textSize="9pt"
+                    android:text="@string/question_8"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_marginLeft="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_8" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textColor="@color/questionTitle"
+                    android:textSize="11pt"
+                    android:text="Вопрос 9"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginLeft="10pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textSize="9pt"
+                    android:text="@string/question_9"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_marginLeft="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_9" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textColor="@color/questionTitle"
+                    android:textSize="11pt"
+                    android:text="Вопрос 10"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginLeft="10pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:width="0dip"
+                    android:textSize="9pt"
+                    android:text="@string/question_10"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_marginLeft="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_10" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:width="40pt"
+                    android:textAlignment="textStart"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorMetal"
+                    android:layout_marginBottom="10pt"
+                    android:layout_gravity="left"
+                    android:padding="6pt"
+                    android:text="Назад"
+                    android:id="@+id/button_to_1_from_2" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorMetal"
+                    android:layout_marginBottom="10pt"
+                    android:text="Сохранить ответы"
+                    android:onClick="saveAnswers"
+                    android:id="@+id/saveQuestionsButton" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:visibility="invisible"
+                    android:text="@string/question_1" />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
