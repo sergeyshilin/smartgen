@@ -1,35 +1,5 @@
 <resources>
     <string name="app_name">SmartGen</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="question_1">
-        <i>В какой день месяца родилась твоя мама? (число)</i>
-    </string>
-    <string name="question_2">
-        <i>Номер месяца, когда ты родился</i>
-    </string>
-    <string name="question_3">
-        <i>Год окончания школы</i>
-    </string>
-    <string name="question_4">
-        <i>Год получения паспорта</i>
-    </string>
-    <string name="question_5">
-        <i>Название улицы, на которой был твой первый дом</i>
-    </string>
-    <string name="question_6">
-        <i>Город, где родилась мама</i>
-    </string>
-    <string name="question_7">
-        <i>Имя твоего питомца</i>
-    </string>
-    <string name="question_8">
-        <i>Любимое животное</i>
-    </string>
-    <string name="question_9">
-        <i>Любимый актер</i>
-    </string>
-    <string name="question_10">
-        <i>"Счастливый номер"</i>
-    </string>
+    <string name="action_questions">Список вопросов</string>
+    <string name="action_passwords">База паролей</string>
 </resources>

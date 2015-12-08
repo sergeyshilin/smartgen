@@ -7,20 +7,28 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Size;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
+//import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Questionnaire extends AppCompatActivity {
-
-    private Map<EditText, String> inputs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,83 +37,40 @@ public class Questionnaire extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        generateInputIds();
-        listenInputs();
-        listenButtons();
+        buildQuestions();
     }
 
-    private void listenButtons() {
-        Button prev = (Button) findViewById(R.id.button_to_1_from_2);
-        Button next = (Button) findViewById(R.id.button_to_2_from_1);
-        Button save = (Button) findViewById(R.id.saveQuestionsButton);
+    private void buildQuestions() {
+        LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
 
-        prev.setOnClickListener(new Button.OnClickListener() {
+        TableRow.LayoutParams params_text = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
+        params_text.setMargins(0, 50, 0, 0);
+        TableRow.LayoutParams params_input = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
+        params_input.setMargins(0, 0, 0, 0);
 
-            @Override
-            public void onClick(View v) {
-                TableLayout table1 = (TableLayout) findViewById(R.id.table_1);
-                TableLayout table2 = (TableLayout) findViewById(R.id.table_2);
+        int i = 0;
 
-                table2.setVisibility(View.GONE);
-                table1.setVisibility(View.VISIBLE);
-                table1.scrollTo(0, 0);
-            }
-        });
+        for ( final Map.Entry<String, String> question : Utils.questions.entrySet()) {
+            TableRow row_question = new TableRow(this);
+            row_question.setLayoutParams(params_text);
 
-        next.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TableLayout table1 = (TableLayout) findViewById(R.id.table_1);
-                TableLayout table2 = (TableLayout) findViewById(R.id.table_2);
+            TextView question_text = new TextView(this);
+            question_text.setText(Html.fromHtml("<b>" + (i + 1) + ".</b> " + question.getKey()));
+            question_text.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9);
+            row_question.addView(question_text);
 
-                table1.setVisibility(View.GONE);
-                table2.setVisibility(View.VISIBLE);
-                table2.scrollTo(0, 0);
-//                AlphaAnimation anim = new AlphaAnimation(1.0f, 0.0f);
-//                anim.setDuration(1000);
-//                anim.setRepeatMode(Animation.REVERSE);
-//                table1.startAnimation(anim);
+            TableRow row_answer = new TableRow(this);
+            row_answer.setLayoutParams(params_input);
 
+            ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
+            if(!question.getValue().isEmpty())
+                progress.setProgress((int) (progress.getProgress() + new Float(100) / Utils.questions.size()));
 
-            }
-        });
-    }
-
-    public void saveAnswers(View view) {
-        saveAnswersToStorage();
-
-        Intent myIntent = new Intent(Questionnaire.this, GeneratePassword.class);
-        Questionnaire.this.startActivity(myIntent);
-    }
-
-    private void saveAnswersToStorage() {
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        for (final Map.Entry<EditText, String> input : inputs.entrySet())
-            editor.putString(input.getKey().getText().toString(), input.getValue());
-
-        editor.commit();
-    }
-
-    private void generateInputIds() {
-        inputs = new HashMap<>();
-
-        inputs.put((EditText) findViewById(R.id.answer_1), "");
-        inputs.put((EditText) findViewById(R.id.answer_2), "");
-        inputs.put((EditText) findViewById(R.id.answer_3), "");
-        inputs.put((EditText) findViewById(R.id.answer_4), "");
-        inputs.put((EditText) findViewById(R.id.answer_5), "");
-        inputs.put((EditText) findViewById(R.id.answer_6), "");
-        inputs.put((EditText) findViewById(R.id.answer_7), "");
-        inputs.put((EditText) findViewById(R.id.answer_8), "");
-        inputs.put((EditText) findViewById(R.id.answer_9), "");
-        inputs.put((EditText) findViewById(R.id.answer_10), "");
-    }
-
-    private void listenInputs() {
-        for (final Map.Entry<EditText, String> input : inputs.entrySet()) {
-            input.getKey().addTextChangedListener(new TextWatcher() {
+            final EditText input_answer = new EditText(this);
+            input_answer.setLines(1);
+            input_answer.setSingleLine(true);
+            input_answer.setText(question.getValue());
+            input_answer.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -115,12 +80,12 @@ public class Questionnaire extends AppCompatActivity {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
 
-                    if(input.getValue().isEmpty() && !String.valueOf(s).isEmpty())
-                        progress.setProgress((int) (progress.getProgress() + new Float(100) / inputs.size()));
-                    else if (!input.getValue().isEmpty() && String.valueOf(s).isEmpty())
-                        progress.setProgress((int) (progress.getProgress() - new Float(100) / inputs.size()));
+                    if (question.getValue().isEmpty() && !String.valueOf(s).isEmpty())
+                        progress.setProgress((int) (progress.getProgress() + new Float(100) / Utils.questions.size()));
+                    else if (!question.getValue().isEmpty() && String.valueOf(s).isEmpty())
+                        progress.setProgress((int) (progress.getProgress() - new Float(100) / Utils.questions.size()));
 
-                    input.setValue(String.valueOf(s));
+                    question.setValue(String.valueOf(s));
                 }
 
                 @Override
@@ -128,13 +93,26 @@ public class Questionnaire extends AppCompatActivity {
 
                 }
             });
+
+            row_answer.addView(input_answer);
+
+            questionsLayout.addView(row_question, 2 * i);
+            questionsLayout.addView(row_answer, 2 * i + 1);
+
+            i++;
+
         }
+
+        Button save = (Button) findViewById(R.id.saveQuestionsButton);
+        save.setVisibility(View.VISIBLE);
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_questionnaire, menu);
-        return true;
+    public void saveAnswers(View view) {
+        Utils.saveAnswersToStorage();
+
+        Intent myIntent = new Intent(Questionnaire.this, GeneratePassword.class);
+        Questionnaire.this.startActivity(myIntent);
     }
 
 }
