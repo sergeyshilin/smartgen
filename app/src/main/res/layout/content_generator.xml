@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="android.com.smartgen.GeneratePassword"
+    tools:showIn="@layout/generate_password">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/fab_margin">
+
+        <TableRow
+            android:layout_marginTop="5pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:textSize="8pt"
+                    android:maxWidth="90pt"
+                    android:layout_width="wrap_content"
+                    android:text="Длина (7 символов)"
+                    android:id="@+id/passLen_text" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="5pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <SeekBar
+                android:layout_marginTop="1pt"
+                android:progress="15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/passLen"
+                android:layout_gravity="right"
+                android:minWidth="65pt" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="5pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:checked="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Цифры"
+                    android:id="@+id/checkbox_digits" />
+
+                <CheckBox
+                    android:checked="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Прописные"
+                    android:id="@+id/checkbox_capital" />
+
+                <CheckBox
+                    android:checked="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Строчные"
+                    android:id="@+id/checkbox_lower" />
+            </GridLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="5pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:checked="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Спец. символы"
+                    android:id="@+id/checkbox_specials" />
+
+                <CheckBox
+                    android:checked="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Данные опроса"
+                    android:id="@+id/checkbox_person" />
+            </GridLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="15pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorMetal"
+                android:layout_marginBottom="10pt"
+                android:text="Сгенерировать"
+                android:onClick="generatePassword"
+                android:id="@+id/generatePassButton" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="10pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:focusable="false"
+                android:textAlignment="center"
+                android:textSize="13pt"
+                android:singleLine="true"
+                android:lines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/passwordField" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="10pt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="9pt"
+                android:textStyle="italic"
+                android:id="@+id/passHint"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="10pt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="right"
+                android:visibility="gone"
+                android:minWidth="50pt"
+                android:layout_marginBottom="20pt"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorMetal"
+                android:text="Сохранить"
+                android:onClick="savePassword"
+                android:id="@+id/savePasswordButton" />
+        </TableRow>
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
