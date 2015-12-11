@@ -8,4 +8,5 @@
     <color name="colorAccent">#2B587A</color>
     <color name="questionTitle">#6591b3</color>
     <color name="colorMetal">#eeeeee</color>
+    <color name="colorDeleteButton">#af5055</color>
 </resources>

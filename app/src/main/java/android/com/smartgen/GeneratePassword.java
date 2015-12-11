@@ -135,14 +135,17 @@ public class GeneratePassword extends AppCompatActivity {
     public void generatePassword(View v) {
         EditText pass = (EditText) findViewById(R.id.passwordField);
         TextView hint = (TextView) findViewById(R.id.passHint);
-        String alphabet = Utils.getAlphabetForGenerator();
-        String gen_pass = RandomStringUtils.random(Utils.PASSLEN, alphabet);
+
+        String gen_pass = Utils.generateHaveAllSymbolsPassword();
 
         if(Utils.ISSETPERSONDATA)
             gen_pass = Utils.generatePersonalDataPassword(gen_pass);
 
         pass.setText(gen_pass);
-        hint.setText(Utils.HINT);
+        if(Utils.ISSETPERSONDATA)
+            hint.setText(Utils.HINT);
+        else
+            hint.setText("");
         Button savePassword = (Button) findViewById(R.id.savePasswordButton);
         savePassword.setVisibility(View.VISIBLE);
 

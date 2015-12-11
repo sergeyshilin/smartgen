@@ -3,8 +3,11 @@ package android.com.smartgen;
 import android.os.Environment;
 import android.support.v4.util.ArrayMap;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -31,17 +35,21 @@ public class Utils {
     public static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     public static String digits = "1234567890";
     public static String specials = "<>!@#$%^&*()_-=+/\\'\":;?[]{}`|~";
+    public static String russianSymbols = "а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я " +
+            "А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я";
+    public static String latinAnalogue = "f , d u l t ` ; p b q r k v y j g h c n e a [ w x i o ] s m ' . z " +
+            "F < D U L T ~ : P B Q R K V Y J G H C N E A { W X I O } S M \" > Z";
 
     public static Map<String, String> questions = new LinkedHashMap<>();
     public static Map<String, String> passwords = new LinkedHashMap<>();
     public static final String QUESTIONS_FILE = "SmartGenQuestions.ser";
-    private static final String PASSWORDS_FILE = "Passwords.ser";
+    public static final String PASSWORDS_FILE = "Passwords.ser";
 
     static {
-        questions.put("День рождения мамы (число)", "");
+        questions.put("Номер школы, в которую вы пошли в первый класс", "");
         questions.put("Номер месяца, когда ты родился", "");
-        questions.put("Год, когда родилась бабушка", "");
-        questions.put("Год окончания школы", "");
+        questions.put("Месяц рождения бабушки (напр. январь)", "");
+        questions.put("Ваше прозвище в детстве", "");
         questions.put("Год получения паспорта", "");
 
         questions.put("Название улицы, на которой был твой первый дом", "");
@@ -52,9 +60,9 @@ public class Utils {
 
         questions.put("Имя твоего питомца", "");
         questions.put("Любимое животное", "");
-        questions.put("Чем оно питается", "");
-        questions.put("Любимая порода собак/кошек", "");
-        questions.put("Любимое растение", "");
+        questions.put("В каком зарубежном городе вы побывали впервые", "");
+        questions.put("Имя лучшего друга", "");
+        questions.put("Девичья фамилия матери", "");
 
         questions.put("Любимый актер", "");
         questions.put("Любимый спортсмен", "");
@@ -62,7 +70,7 @@ public class Utils {
         questions.put("Имя автора любимой книги", "");
         questions.put("Сколько раз смотрел \"Star wars\"", "");
 
-        questions.put("Серия паспорта", "");
+        questions.put("Номер паспорта", "");
         questions.put("Последние 3 цифры номера мобильного", "");
         questions.put("Номер школы", "");
         questions.put("\"Счастливый номер\"", "");
@@ -76,7 +84,6 @@ public class Utils {
             dir.mkdirs();
             File qf = new File(dir, Utils.QUESTIONS_FILE);
 
-            System.out.println(qf.toString());
             FileOutputStream fileOut = new FileOutputStream(qf);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(questions);
@@ -94,7 +101,6 @@ public class Utils {
             dir.mkdirs();
             File qf = new File(dir, Utils.PASSWORDS_FILE);
 
-            System.out.println(qf.toString());
             FileOutputStream fileOut = new FileOutputStream(qf);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(passwords);
@@ -111,8 +117,6 @@ public class Utils {
             File dir = new File (root.getAbsolutePath() + "/SmartGen");
             dir.mkdirs();
             File qf = new File(dir, Utils.QUESTIONS_FILE);
-
-            System.out.println(qf.toString());
 
             FileInputStream fileIn = new FileInputStream(qf);
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -132,8 +136,6 @@ public class Utils {
             File dir = new File (root.getAbsolutePath() + "/SmartGen");
             dir.mkdirs();
             File qf = new File(dir, Utils.PASSWORDS_FILE);
-
-            System.out.println(qf.toString());
 
             FileInputStream fileIn = new FileInputStream(qf);
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -183,8 +185,8 @@ public class Utils {
                 not_empty.put(question.getKey(), question.getValue());
 
         int answers_count = (Utils.PASSLEN >= 6 && Utils.PASSLEN <= 8) ? 2 :
-                (Utils.PASSLEN >= 9 && Utils.PASSLEN <= 12) ? 3 :
-                        (Utils.PASSLEN >= 13 && Utils.PASSLEN <= 15) ? 1 : 1;
+                (Utils.PASSLEN >= 9 && Utils.PASSLEN <= 12) ? 2 :
+                        (Utils.PASSLEN >= 13 && Utils.PASSLEN <= 15) ? 3 : 1;
 
         Random generator = new Random();
 
@@ -203,19 +205,50 @@ public class Utils {
 
     private static String[] getPartsWithPartedQuestions(String randomQuestion, String randomAnswer) {
         Random rand = new Random();
-        int position = (randomAnswer.length() > 3) ? rand.nextInt(randomAnswer.length()) :
-                        (randomAnswer.length() == 3) ? rand.nextInt(3) :
-                        (randomAnswer.length() == 2) ? rand.nextInt(2) : 0;
+        int maxcount = (Utils.PASSLEN >= 6 && Utils.PASSLEN <= 8) ? 3 :
+                        (Utils.PASSLEN >= 9 && Utils.PASSLEN <= 12) ? 4 :
+                        (Utils.PASSLEN >= 13 && Utils.PASSLEN <= 15) ? 4 : 1;
+        
+        int position = (randomAnswer.length() >= 5) ? rand.nextInt(randomAnswer.length() - maxcount) :
+                        (randomAnswer.length() == 4 && maxcount == 3) ? rand.nextInt(randomAnswer.length() - 2) : 0;
 
-        int count = (randomAnswer.length() - position >= 3) ? rand.nextInt(3) + 1 :
-                        (randomAnswer.length() - position == 2) ? rand.nextInt(2) + 1 : 1;
-
-        String end = count == 1 ? " символ" : count == 2 ? " символа" : " символа";
+        int count = (randomAnswer.length() >= 4) ? maxcount : randomAnswer.length();
 
         String part = randomAnswer.substring(position, position + count);
-        String question = randomQuestion + "(" + count +  end + " с позиции " + (position + 1) + ")";
+        String question = randomQuestion;
+
+        if(randomAnswer.length() >= 4)
+            question += "(" + count +  "символа" + " с позиции " + (position + 1) + ")";
+
+        if(isRussianString(part)) {
+            part = getLatinAnalogue(part);
+            question += "(Русские символы в латинской раскладке)";
+        }
 
         return new String[]{part, question};
+    }
+
+    private static String getLatinAnalogue(String part) {
+        String result = "";
+        for (int i = 0; i < part.length(); i++) {
+            String sym = String.valueOf(part.charAt(i));
+            if(russianSymbols.contains(sym)) {
+                result += String.valueOf(latinAnalogue.charAt(russianSymbols.indexOf(sym)));
+            } else {
+                result += sym;
+            }
+
+        }
+
+        return result;
+    }
+
+    private static boolean isRussianString(String part) {
+        for (int i = 0; i < part.length(); i++)
+            if(russianSymbols.contains(String.valueOf(part.charAt(i))))
+                return true;
+
+        return false;
     }
 
 
@@ -231,10 +264,16 @@ public class Utils {
             allNotes.add(part.getValue());
         }
 
-        char[] delimeters = gen_pass.substring(0, gen_pass.length() - partsLen).toCharArray();
-        for (char delim : delimeters) {
-            allTokens.add(String.valueOf(delim));
-            allNotes.add(String.valueOf(delim));
+        StringBuilder builder_tokens = new StringBuilder();
+        StringBuilder builder_notes = new StringBuilder();
+
+        if(gen_pass.length() != 0) {
+
+            char[] delimeters = gen_pass.substring(0, gen_pass.length() - partsLen).toCharArray();
+            for (char delim : delimeters) {
+                allTokens.add(String.valueOf(delim));
+                allNotes.add(String.valueOf(delim));
+            }
         }
 
         Random rgen = new Random();
@@ -250,11 +289,8 @@ public class Utils {
             allNotes.set(randPos, temp_note);
         }
 
-        StringBuilder builder_tokens = new StringBuilder();
-        StringBuilder builder_notes = new StringBuilder();
-        for(String s : allTokens) {
+        for(String s : allTokens)
             builder_tokens.append(s);
-        }
 
         for(int i = 0; i < allNotes.size(); i++) {
             builder_notes.append("'");
@@ -269,4 +305,58 @@ public class Utils {
         return builder_tokens.toString();
     }
 
+    public static boolean questionsInStorage() {
+        File root = android.os.Environment.getExternalStorageDirectory();
+        File file = new File (root.getAbsolutePath() + "/SmartGen/" + Utils.QUESTIONS_FILE);
+        if(file.exists())
+            return true;
+
+        return false;
+    }
+
+    public static String generateHaveAllSymbolsPassword() {
+        String result = "";
+        ArrayList<String> alphabets = new ArrayList<>();
+        if(ISSETDIGITS)
+            alphabets.add(digits);
+        if(ISSETCAPITAL)
+            alphabets.add(alphabet.toUpperCase());
+        if(ISSETLOWER)
+            alphabets.add(alphabet);
+        if(ISSETSPECIALS)
+            alphabets.add(specials);
+
+        if(!alphabets.isEmpty())
+            result = generateFromAlphabets(alphabets);
+
+        return result;
+    }
+
+    private static String generateFromAlphabets(ArrayList<String> alphabets) {
+        String result = "";
+
+        for(String alphabet : alphabets)
+            result += RandomStringUtils.random(1, alphabet);
+
+        for(int i = 0; i < Utils.PASSLEN - alphabets.size(); i++) {
+            Random rn = new Random();
+            result += RandomStringUtils.random(1, alphabets.get(rn.nextInt(alphabets.size())));
+        }
+
+        return shuffleString(result);
+    }
+
+    private static String shuffleString(String input) {
+        List<Character> characters = new ArrayList<Character>();
+        for(char c:input.toCharArray())
+            characters.add(c);
+
+        StringBuilder output = new StringBuilder(input.length());
+        while(characters.size() != 0) {
+            int randPicker = (int)(Math.random()*characters.size());
+            output.append(characters.remove(randPicker));
+        }
+
+        return output.toString();
+    }
 }

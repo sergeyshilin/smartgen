@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Html;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
@@ -52,7 +53,7 @@ public class Questionnaire extends AppCompatActivity {
             TableRow row_answer = new TableRow(this);
             row_answer.setLayoutParams(params_input);
 
-            ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
+            final ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
             if(!question.getValue().isEmpty())
                 progress.setProgress((int) (progress.getProgress() + new Float(100) / Utils.questions.size()));
 
@@ -60,6 +61,22 @@ public class Questionnaire extends AppCompatActivity {
             input_answer.setLines(1);
             input_answer.setSingleLine(true);
             input_answer.setText(question.getValue());
+            if(Utils.questionsInStorage()) {
+                input_answer.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                input_answer.setOnFocusChangeListener(new EditText.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if(hasFocus && input_answer.getText().toString().equals(question.getValue())) {
+                            input_answer.setText("");
+                            progress.setProgress((int) (progress.getProgress() + new Float(100) / Utils.questions.size()));
+                        } else if (!hasFocus && input_answer.getText().toString().isEmpty()) {
+                            input_answer.setText(question.getValue());
+                        } else if (!hasFocus && !input_answer.getText().toString().isEmpty()) {
+                            input_answer.setInputType(InputType.TYPE_CLASS_TEXT);
+                        }
+                    }
+                });
+            }
             input_answer.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -75,7 +92,8 @@ public class Questionnaire extends AppCompatActivity {
                     else if (!question.getValue().isEmpty() && String.valueOf(s).isEmpty())
                         progress.setProgress((int) (progress.getProgress() - new Float(100) / Utils.questions.size()));
 
-                    question.setValue(String.valueOf(s));
+                    if(!String.valueOf(s).isEmpty() && Utils.questionsInStorage() || !Utils.questionsInStorage())
+                        question.setValue(String.valueOf(s));
                 }
 
                 @Override
